@@ -8,7 +8,7 @@ g++ main.cpp Taxon.cpp CommonName.cpp Relation.cpp -o relation
 run relation.exe
 
 Wait for the program to load the datasets.
-Input species 1 and species 2.
+Input species 1 and species 2 or common names.
 It should return the relatedness percentage and the lca.
 If its invalid, relaunch relation.exe (I tested it with human and chimpanzee). It currently doesnt ask for the name again, added to TO-DO.
 
