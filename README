@@ -1,1 +1,33 @@
-temporary
+This is a bare bones data structure with both the scientific names and common names for 2.3 billion(?) species. The program has a very, very simple design and a simple Least Common Ancestor finder.
+The Data Structure (possibly for now) takes a tree of linked taxonomy, in the .tsv, and puts it in an unordered map, stored like a tree.
+We only have 1 algorithm right now, which is just a simple linear comparison based on the taxonomy ancestors.
+It should compute the relation between two species and give their least common ancestor.
+
+Usage:
+g++ main.cpp Taxon.cpp CommonName.cpp Relation.cpp -o relation
+run relation.exe
+
+Currently names with spaces is bugged (i.e. Great White Shark; will return invalid). Names like "human" and "chimpanzee" works (should give a relation value of 89%).
+The current computational algorithm to find the least common ancestor might also be off. This is what I would work on the most while also working on a second algorithm to compare.
+Currently, there is no timing to return the time it took to find the lca, but the function itself should be O(n) worst case.
+
+DOWNLOAD THE DATASET HERE: https://drive.google.com/drive/folders/1EoXUhYoT98MNpYTP3l9lG752HALaDImx?usp=drive_link
+It's way too big to upload to github for right now. Drop the two tsv files into the Project 2 folder.
+
+Documentation for the dataset:
+https://www.checklistbank.org/about/formats#data-content
+https://catalogueoflife.github.io/coldp/
+
+TO-DO:
+- Timing the algorithm
+- Implement multiple algorithms to compare
+- Implement actual name validations and possibly even autofill
+  - Preferably you would type in the name on the web, and then there would be a drop down list of matching names.
+- Implement web app
+  - and all the functions for it
+- Try to get the tsv files to be included in the repository somehow
+- return the path of ancestors between two species
+- Debug everything
+
+Download the ZIP and compile.
+* I am using VSCode and Windows, I am not sure if it works on CLion or Linux.
