@@ -7,6 +7,11 @@ Usage:
 g++ main.cpp Taxon.cpp CommonName.cpp Relation.cpp -o relation
 run relation.exe
 
+Wait for the program to load the datasets.
+Input species 1 and species 2.
+It should return the relatedness percentage and the lca.
+If its invalid, relaunch relation.exe (I tested it with human and chimpanzee). It currently doesnt ask for the name again, added to TO-DO.
+
 Currently names with spaces is bugged (i.e. Great White Shark; will return invalid). Names like "human" and "chimpanzee" works (should give a relation value of 89%).
 The current computational algorithm to find the least common ancestor might also be off. This is what I would work on the most while also working on a second algorithm to compare.
 Currently, there is no timing to return the time it took to find the lca, but the function itself should be O(n) worst case.
