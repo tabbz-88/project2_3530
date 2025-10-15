@@ -1,5 +1,5 @@
-#ifndef VERNACULAR_H
-#define VERNACULAR_H
+#ifndef COMMON_H
+#define COMMON_H
 
 #include <string>
 #include <unordered_map>
@@ -15,3 +15,4 @@ private:
 };
 
 #endif
+
