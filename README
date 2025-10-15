@@ -18,7 +18,7 @@ The current computational algorithm to find the least common ancestor might also
 Currently, there is no timing to return the time it took to find the lca, but the function itself should be O(n) worst case.
 
 DOWNLOAD THE DATASET HERE: https://drive.google.com/drive/folders/1EoXUhYoT98MNpYTP3l9lG752HALaDImx?usp=drive_link
-It's way too big to upload to github for right now. Drop the two tsv files into the Project 2 folder.
+NameUsage.tsv is now trimmed to 176MB, still too big to upload to github, but much more manageable. VernacularName.tsv is already included.
 I couldn't get the API to work, so if you guys figure it out and implements it, it will be very helpful.
 
 Documentation for the dataset:
