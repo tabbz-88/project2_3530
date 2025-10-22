@@ -1,4 +1,4 @@
-This is a bare bones data structure with both the scientific names and common names for 2.3 billion(?) species. The program has a very, very simple design and a simple Least Common Ancestor finder.
+This is a bare bones data structure with both the scientific names and common names for 2.3 million(?) species. The program has a very, very simple design and a simple Least Common Ancestor finder.
 The Data Structure (possibly for now) takes a tree of linked taxonomy, in the .tsv, and puts it in an unordered map, stored like a vector.
 Basically, it just reads the taxonomy from the tsv. A few options for actual data structures could be a trie of the ranks, a n-ary tree, or an adjacency list.
 We only have 1 algorithm right now, which is just a simple linear comparison based on the taxonomy ancestors.
