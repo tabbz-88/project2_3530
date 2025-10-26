@@ -2,6 +2,7 @@ This project is using the Catalogue of Life dataset, with over 2.3 million speci
 The main goal is to find the relatedness between two different species, output the path between them, and compare BFS and DFS when searching for a common ancestor.
 
 Usage:
+Clone or pull to make sure the tsv are installed properly, otherwise download here: https://drive.google.com/drive/folders/1EoXUhYoT98MNpYTP3l9lG752HALaDImx?usp=sharing
 g++ main.cpp Taxon.cpp Load.cpp -o relation
 run relation.exe
 
