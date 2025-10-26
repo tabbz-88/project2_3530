@@ -70,7 +70,7 @@ vector<string> Taxon::findPath(const string &a, const string &b) const {
     return pathA;
 }
 
-void Taxon::computeDepths() {
+void Taxon::computeDepths() { // get depth from vertices, to calculate relatedness
     queue<string> q;
 
     // find all roots
@@ -96,7 +96,7 @@ void Taxon::computeDepths() {
     cout << "Loaded depths.\n";
 }
 
-double Taxon::relatedness(const string &a, const string &b) const {
+double Taxon::relatedness(const string &a, const string &b) const { // depth of common ancestor / max (depth A, depth B), relatedness based on distance rather than DNA
     string lca = commonAncestor(a, b);
     if (lca.empty()) 
         return 0.0;
@@ -144,4 +144,5 @@ vector<string> Taxon::DFS(const string &start, const string &target) const { // 
     vector<string> path;
     helperDFS(start, target, path);
     return path;
+
 }
