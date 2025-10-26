@@ -1,39 +1,35 @@
-This is a bare bones data structure with both the scientific names and common names for 2.3 million(?) species. The program has a very, very simple design and a simple Least Common Ancestor finder.
-The Data Structure (possibly for now) takes a tree of linked taxonomy, in the .tsv, and puts it in an unordered map, stored like a vector.
-Basically, it just reads the taxonomy from the tsv. A few options for actual data structures could be a trie of the ranks, a n-ary tree, or an adjacency list.
-We only have 1 algorithm right now, which is just a simple linear comparison based on the taxonomy ancestors.
-It should compute the relation between two species and give their least common ancestor.
+This project is using the Catalogue of Life dataset, with over 2.3 million species. The main data structure is built on a graph that is bidirectional, and calculates its own depth.
+The main goal is to find the relatedness between two different species, output the path between them, and compare BFS and DFS when searching for a common ancestor.
 
 Usage:
-g++ main.cpp Taxon.cpp CommonName.cpp Relation.cpp -o relation
+g++ main.cpp Taxon.cpp Load.cpp -o relation
 run relation.exe
 
-Wait for the program to load the datasets.
-Input species 1 and species 2 or common names.
-It should return the relatedness percentage and the lca.
-If its invalid, relaunch relation.exe (I tested it with human and chimpanzee). It currently doesnt ask for the name again, added to TO-DO.
+Wait for the program to load the datasets and depth.
+Input species 1 and species 2 or common names. (Due to graph structure, names are case sensitive and the dataset has a mix of both).
+It should return the relatedness percentage, the path, and the common ancestor..
+Name validations should work for the most part.
 
-Currently names with spaces is bugged (i.e. Great White Shark; will return invalid). Names like "human" and "chimpanzee" works (should give a relation value of 89%).
-The current computational algorithm to find the least common ancestor might also be off. This is what I would work on the most while also working on a second algorithm to compare.
-Currently, there is no timing to return the time it took to find the lca, but the function itself should be O(n) worst case.
-
-DOWNLOAD THE DATASET HERE: https://drive.google.com/drive/folders/1EoXUhYoT98MNpYTP3l9lG752HALaDImx?usp=drive_link
-NameUsage.tsv is now trimmed to 176MB, still too big to upload to github, but much more manageable. VernacularName.tsv is already included.
-I couldn't get the API to work, so if you guys figure it out and implements it, it will be very helpful.
+Creating the graph is O(n), n entries from the dataset.
+Computing the depth for each vertice is O(n).
+Finding the common ancestor is O(h), h is the depth of the graph.
+DFS should be slightly faster than BFS for farther relations, but both should be O(h).
+Other functions should be O(1).
 
 Documentation for the dataset:
 https://www.checklistbank.org/about/formats#data-content
 https://catalogueoflife.github.io/coldp/
 
+Documentation for implementation:
+https://www.geeksforgeeks.org/dsa/graph-data-structure-and-algorithms/
+https://www.geeksforgeeks.org/dsa/breadth-first-search-or-bfs-for-a-graph/
+https://www.geeksforgeeks.org/dsa/depth-first-search-or-dfs-for-a-graph/
+
 TO-DO:
-- Timing the algorithm
-- Implement multiple algorithms to compare
-- Implement actual name validations and possibly even autofill
+- Autofill names, fix case sensitivity.
   - Preferably you would type in the name on the web, and then there would be a drop down list of matching names.
 - Implement web app
   - and all the functions for it
-- Try to get the tsv files to be included in the repository somehow
-- return the path of ancestors between two species
 - Debug everything
 
 Download the ZIP and compile.
