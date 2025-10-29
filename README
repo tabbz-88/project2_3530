@@ -21,7 +21,7 @@ Documentation for the dataset:
 https://www.checklistbank.org/about/formats#data-content
 https://catalogueoflife.github.io/coldp/
 
-Documentation for implementation:
+Documentation for search implementation (basically the same as BST, but in graph format):
 https://www.geeksforgeeks.org/dsa/graph-data-structure-and-algorithms/
 https://www.geeksforgeeks.org/dsa/breadth-first-search-or-bfs-for-a-graph/
 https://www.geeksforgeeks.org/dsa/depth-first-search-or-dfs-for-a-graph/
