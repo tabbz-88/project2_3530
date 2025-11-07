@@ -2,6 +2,7 @@
 #include <sstream>
 #include <iostream>
 #include "Taxon.h"
+#include <cctype>
 using namespace std;
 
 void loadName(const string &filename, Taxon &graph) {
@@ -25,6 +26,10 @@ void loadName(const string &filename, Taxon &graph) {
             else if (col == 1) parentID = temp; // col:parentID
             else if (col == 4) name = temp;     // col:scientificName
             ++col; 
+        }
+
+        for (char &c : name) {
+            c = tolower(static_cast<unsigned char>(c));
         }
 
         graph.scientificName(id, name);
@@ -53,6 +58,11 @@ void loadVernacularName(const string &filename, Taxon &graph) {
             else if (col == 2) name = temp;     // col:name
             ++col; 
         }
+
+        for (char &c : name) {
+            c = tolower(static_cast<unsigned char>(c));
+        }
+
         graph.commonName(taxonID, name);
     }
     cout << "Loaded " << filename << "\n";
