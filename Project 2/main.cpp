@@ -1,6 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include <algorithm>
+#include <cstring>
 #include "httplib.h"
 #include "Taxon.h"
 using namespace std;
@@ -56,6 +57,12 @@ int main() {
 
     string inputA, inputB, idA, idB;
 
+    vector<string> path;
+    string lca;
+    double relationship;
+    double bfs;
+    double dfs;
+
     // server start
     Server svr;
 
@@ -63,13 +70,48 @@ int main() {
         res.set_content(html, "text/html");
     });
 
-    svr.Get("/display", [](const Request &req, Response &res) {
-        const char *html2 = R"(
-        )"; // html for page 2
-        res.set_content(html2, "text/html");
+    svr.Get("/display", [&inputA, &inputB, &graph, &path, &lca, &relationship, &bfs, &dfs](const Request &req, Response &res) {
+
+        // all data needed loaded through here
+        // vars: array path, string lca, double relationship, double bfs, double dfs
+        // vars: string name1, string name2
+        string data = "var path = [";
+        for (const auto &i : path) {
+            data += '"' + graph.getName(i) + R"(", )";
+        }
+        data = data.substr(0, data.length() - 2) + "];\n";
+        data += R"(var lca = ")" + graph.getName(lca) + R"(";)" + "\n";
+        data += "var relationship = " + to_string(relationship) + ";\n";
+        data += "var bfs = " + to_string(bfs) + ";\n";
+        data += "var dfs = " + to_string(dfs) + ";\n";
+        data += R"(var name1 = ")" + inputA + R"(";)" + "\n";
+        data += R"(var name2 = ")" + inputB + R"(";)" + "\n";
+
+
+        // html/css/javascript for second page
+        // data needed is included in data variable and can access any of that data in this code
+        string html2 = R"(
+        <body>
+            <p id="firstName"></p>
+            <p id="secondName"></p>
+
+
+        <script>
+            )" + data +
+            R"(
+        document.getElementById("firstName").innerHTML = name1;
+        document.getElementById("secondName").innerHTML = name2;
+        </script>
+        </body>
+        )";
+
+
+        const char *page =  html2.c_str(); // html for page 2
+        res.set_content(page, "text/html");
     });
 
-    svr.Post("/post", [&inputA, &inputB, &idA, &idB, &graph](const Request &req, Response &res) {
+
+    svr.Post("/post", [&inputA, &inputB, &idA, &idB, &graph, &path, &lca, &relationship, &bfs, &dfs](const Request &req, Response &res) {
         inputA = req.has_param("name1") ? req.get_param_value("name1") : "";
         inputB = req.has_param("name2") ? req.get_param_value("name2") : "";
         if (inputA.empty() || inputB.empty()) { // invalid input
@@ -88,14 +130,15 @@ int main() {
         }
 
         // common ancestor
-        string lca = graph.commonAncestor(idA, idB);
+        lca = graph.commonAncestor(idA, idB);
         if (lca.empty()) {
             res.set_content("noCommon", "text/plain");
             return;
         }
 
+
         // path between species
-        auto path = graph.findPath(idA, idB);
+        path = graph.findPath(idA, idB);
         if (path.empty()) {
             res.set_content("noPath", "text/plain");
             return;
@@ -104,7 +147,7 @@ int main() {
         // display
         cout << "\nCommon ancestor: " << graph.getName(lca) << "\n";
 
-        double relationship = graph.relatedness(idA, idB);
+        relationship = graph.relatedness(idA, idB);
         cout << "Relatedness: " << relationship << "%\n\n";
 
         cout << "Path:\n";
@@ -119,8 +162,12 @@ int main() {
         graph.DFS(idA, lca);
         auto t3 = chrono::high_resolution_clock::now();
 
-        cout << "\nBFS time: " << chrono::duration<double, micro>(t2 - t1).count() << " microseconds\n";
-        cout << "DFS time: " << chrono::duration<double, micro>(t3 - t2).count() << " microseconds\n";
+        bfs = chrono::duration<double, micro>(t2 - t1).count();
+        dfs = chrono::duration<double, micro>(t3 - t2).count();
+        cout << "\nBFS time: " << bfs << " microseconds\n";
+        cout << "DFS time: " << dfs << " microseconds\n";
+
+
     });
 
     svr.listen("localhost", 8080);
