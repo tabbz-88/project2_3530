@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 class Taxon {
@@ -34,6 +35,9 @@ public:
     unordered_map<string, string> name;                 // id -> scientific
     unordered_map<string, string> scientificID;         // scientific -> id
     unordered_map<string, string> commonID;             // common -> id
+
+    string toLower(const string &s);            // normalize lowercase
 };
+
 
 #endif
