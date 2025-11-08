@@ -7,7 +7,7 @@ Clone to make sure the tsv are installed properly, otherwise download here: http
 launch using CMake, make sure it is using the right directory and C++ 11.
 goto localhost:8080
 
-You can also build it normally using:
+You can also build it normally and use commandline:
 g++ main.cpp Taxon.cpp Load.cpp -o relation
 run relation.exe
 
