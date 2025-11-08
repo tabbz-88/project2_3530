@@ -8,14 +8,70 @@ using namespace std;
 
 // Html for page 1
 const char *html = R"(
-<form id="formElem">
-  <label for="name1">Animal 1:</label>
-  <input type="text" id="name1" name="name1" placeholder="Enter first name">
-    <label for="name2">Animal 2:</label>
-  <input type="text" id="name2" name="name2" placeholder="Enter second name">
-    <input type="submit"/>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Critter Connections!</title>
+<style>
+body {
+	background-color: #a7e0a2
+}
+   .container {
+       position: relative;
+       width: device-width;
+       height: device-height;
+       display: flex;
+       justify-content: center;
+       margin: 0;
+   }
 
+   .rectangle {
+       width: 400px;
+       height: 150px;
+       position: absolute;
+   }
+
+   .one {
+       background-color: #22b512;
+       border-radius: 15px;
+       z-index: -1;
+   }
+
+   .two {
+       background-color: #22b512;
+       top: 200px;
+       border-radius: 15px;
+       z-index: -1;
+   }
+}
+</style>
+</head>
+<body>
+   <div class="container">
+       <div class="rectangle one"></div>
+       <div class="rectangle two"></div>
+   </div>
+	<font color=#824c1d><h1 style="text-align: center;">Animal 1</h1></font>
+    <br>
+    <form style="text-align: center;" id="formElem">
+  	<input style="text-align: center;" type="text" id="name1" name="name1" placeholder="Enter first name">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+	<font color=#824c1d><h1 style="text-align: center;">Animal 2</h1></font>
+    <br>
+    <input style="text-align: center;" type="text" id="name2" name="name2" placeholder="Enter second name">
+    <br>
+    <br>
+    <br>
+    <br>
+    <input style="text-align: center;" type="submit">
+	</form>
+</body>
 <script>
   formElem.onsubmit = async (e) => {
     e.preventDefault();
@@ -39,6 +95,7 @@ const char *html = R"(
     }
   };
 </script>
+</html>
 )";
 
 void loadName(const string &, Taxon &);
