@@ -1,21 +1,18 @@
 This project is using the Catalogue of Life dataset, with over 2.3 million species. The main data structure is built on a graph that is bidirectional, and calculates its own depth.
 The main goal is to find the relatedness between two different species, output the path between them, and compare BFS and DFS when searching for a common ancestor.
+https://docs.google.com/document/d/1Hc2h5f5hf40UH2znodt9OwZI2CivA82ZOyT6q0ecwaE/edit?usp=sharing
 
 Usage:
 Clone or pull to make sure the tsv are installed properly, otherwise download here: https://drive.google.com/drive/folders/1EoXUhYoT98MNpYTP3l9lG752HALaDImx?usp=sharing
 g++ main.cpp Taxon.cpp Load.cpp -o relation
 run relation.exe
+visit localhost:8080
+
+Alternatively, creating a codespace and running it through CMake should also provide a link to localhost:8080
 
 Wait for the program to load the datasets and depth.
-Input species 1 and species 2 or common names. (Due to graph structure, names are case sensitive and the dataset has a mix of both).
-It should return the relatedness percentage, the path, and the common ancestor..
-Name validations should work for the most part.
-
-Creating the graph is O(n), n entries from the dataset.
-Computing the depth for each vertice is O(n).
-Finding the common ancestor is O(h), h is the depth of the graph.
-DFS should be slightly faster than BFS for farther relations, but both should be O(h).
-Other functions should be O(1).
+Input species 1 and species 2 or common names.
+It should return the relatedness percentage, the path, and the common ancestor.
 
 Documentation for the dataset:
 https://www.checklistbank.org/about/formats#data-content
@@ -29,12 +26,4 @@ https://www.geeksforgeeks.org/dsa/depth-first-search-or-dfs-for-a-graph/
 Github page for cpp-httplib:
 https://github.com/yhirose/cpp-httplib/tree/master
 
-TO-DO:
-- Autofill names, fix case sensitivity.
-  - Preferably you would type in the name on the web, and then there would be a drop down list of matching names.
-- Implement web app
-  - and all the functions for it
-- Debug everything
-
-Download the ZIP and compile.
 * I am using VSCode and Windows, I am not sure if it works on CLion or Linux.
