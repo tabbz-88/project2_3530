@@ -11,7 +11,7 @@ visit localhost:8080
 Alternatively, creating a codespace and running it through CMake should also provide a link to localhost:8080
 
 Wait for the program to load the datasets and depth.
-Input species 1 and species 2 or common names.
+Input species 1 and species 2 or common names. When putting common names, you have to be specific, i.e. "Trout" may be a synonymous name for another animal, so be specific, like "Steelhead trout"
 It should return the relatedness percentage, the path, and the common ancestor.
 
 Documentation for the dataset:
