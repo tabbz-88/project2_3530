@@ -6,13 +6,23 @@
 #include <iostream>
 using namespace std;
 
+string Taxon::toLower(const string &s) {
+    string result = s;
+    transform(s.begin(), s.end(), result.begin(), [](unsigned char c)
+        {return ::tolower(c);});
+
+    return result;
+}
+
 void Taxon::scientificName(const string &id, const string &sci) { // scientific name and id
-    name[id] = sci;
-    scientificID[sci] = id;
+    string sciLow = toLower(sci);
+    name[id] = sciLow;
+    scientificID[sciLow] = id;
 }
 
 void Taxon::commonName(const string &id, const string &common) { // common name from id
-    commonID[common] = id;
+    string commonLow = toLower(common);
+    commonID[commonLow] = id;
 }
 
 void Taxon::relation(const string &childID, const string &parentID) { // map child to parent
@@ -21,10 +31,11 @@ void Taxon::relation(const string &childID, const string &parentID) { // map chi
 }
 
 string Taxon::nameToID(const string &input) const { // read input and get id from common/scientific
-    if (scientificID.count(input)) 
-        return scientificID.at(input);
-    if (commonID.count(input)) 
-        return commonID.at(input);
+    string inputLow = input;
+    if (scientificID.count(inputLow))
+        return scientificID.at(inputLow);
+    if (commonID.count(inputLow))
+        return commonID.at(inputLow);
     return "";
 }
 
@@ -146,3 +157,4 @@ vector<string> Taxon::DFS(const string &start, const string &target) const { // 
     return path;
 
 }
+
