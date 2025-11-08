@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-string Taxon::toLower(const string &s) {
+string toLower(const string &s) {
     string result = s;
     transform(s.begin(), s.end(), result.begin(), [](unsigned char c)
         {return ::tolower(c);});
@@ -31,7 +31,7 @@ void Taxon::relation(const string &childID, const string &parentID) { // map chi
 }
 
 string Taxon::nameToID(const string &input) const { // read input and get id from common/scientific
-    string inputLow = input;
+    string inputLow = toLower(input);
     if (scientificID.count(inputLow))
         return scientificID.at(inputLow);
     if (commonID.count(inputLow))
@@ -157,4 +157,5 @@ vector<string> Taxon::DFS(const string &start, const string &target) const { // 
     return path;
 
 }
+
 
