@@ -3,12 +3,13 @@ The main goal is to find the relatedness between two different species, output t
 https://docs.google.com/document/d/1Hc2h5f5hf40UH2znodt9OwZI2CivA82ZOyT6q0ecwaE/edit?usp=sharing
 
 Usage:
-Clone or pull to make sure the tsv are installed properly, otherwise download here: https://drive.google.com/drive/folders/1EoXUhYoT98MNpYTP3l9lG752HALaDImx?usp=sharing
+Clone to make sure the tsv are installed properly, otherwise download here: https://drive.google.com/drive/folders/1EoXUhYoT98MNpYTP3l9lG752HALaDImx?usp=sharing
+launch using CMake, make sure it is using the right directory and C++ 11.
+goto localhost:8080
+
+You can also build it normally using:
 g++ main.cpp Taxon.cpp Load.cpp -o relation
 run relation.exe
-visit localhost:8080
-
-Alternatively, creating a codespace and running it through CMake should also provide a link to localhost:8080
 
 Wait for the program to load the datasets and depth.
 Input species 1 and species 2 or common names. When putting common names, you have to be specific, i.e. "Trout" may be a synonymous name for another animal, so be specific, like "Steelhead trout"
