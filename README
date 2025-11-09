@@ -6,12 +6,14 @@ Usage:
 Clone to make sure the tsv are installed properly, otherwise download here: https://drive.google.com/drive/folders/1EoXUhYoT98MNpYTP3l9lG752HALaDImx?usp=sharing
 git lfs install
 git clone https://github.com/tabbz-88/project2_3530
-launch using CMake, make sure it is using the right directory and C++ 11.
+launch using CMake, make sure it is using the right directory* and C++ 11.
 goto localhost:8080
 
 You can also build it normally and use commandline:
 g++ main.cpp Taxon.cpp Load.cpp -o relation
 run relation.exe
+
+*In Clion, Edit Configurations to where the directory is, so the tsv files are properly loaded.
 
 Wait for the program to load the datasets and depth.
 Input species 1 and species 2 or common names. When putting common names, you have to be specific, i.e. "Trout" may be a synonymous name for another animal, so be specific, like "Steelhead trout"
