@@ -71,7 +71,6 @@ body {
     <br>
     <input style="text-align: center;" type="submit">
 	</form>
-</body>
 <script>
   formElem.onsubmit = async (e) => {
     e.preventDefault();
@@ -135,12 +134,12 @@ int main() {
         // all data needed loaded through here
         // vars: array path, string lca, double relationship, double bfs, double dfs
         // vars: string name1, string name2
-        string data = "var path = [";
-        for (const auto &i : path) {
-            data += '"' + graph.getName(i) + R"(", )";
+        string graphMark = "graph LR;\n";
+        for (int i = 0; i < path.size() - 1; i++) {
+            graphMark += "\t" + to_string(i) + '[' + graph.getName(path[i]) + ']' + "-->" + to_string(i+1) + '[' + graph.getName(path[i+1]) + "]\n";
         }
-        data = data.substr(0, data.length() - 2) + "];\n";
-        data += R"(var lca = ")" + graph.getName(lca) + R"(";)" + "\n";
+
+        string data = R"(var lca = ")" + graph.getName(lca) + R"(";)" + "\n";
         data += "var relationship = " + to_string(relationship) + ";\n";
         data += "var bfs = " + to_string(bfs) + ";\n";
         data += "var dfs = " + to_string(dfs) + ";\n";
@@ -212,11 +211,26 @@ body {
     <br>
 	<font color=#824c1d><h2 style="text-align: center;">BFS Calculation Time: <span id="bfsTime"></span> microseconds</h2></font>
     <font color=#824c1d><h2 style="text-align: center;">DFS Calculation Time: <span id="dfsTime"></span> microseconds</h2></font>
+<pre class="mermaid" style="text-align: center;">
+---
+config:
+  class:
+    hideEmptyMembersBox: true
+---
+)" +
+graphMark +
+ R"(
 
+
+</pre>
     <button onclick='backToHome(event)'>Reset</button>
 	</form>
 </body>
+
 </html>
+<script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    </script>
 
         <script>
             )" + data +
