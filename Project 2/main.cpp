@@ -126,6 +126,9 @@ int main() {
     svr.Get("/", [](const Request &req, Response &res) {
         res.set_content(html, "text/html");
     });
+    svr.Get("/home", [](const Request &req, Response &res) {
+        res.set_content(html, "text/html");
+    });
 
     svr.Get("/display", [&inputA, &inputB, &graph, &path, &lca, &relationship, &bfs, &dfs](const Request &req, Response &res) {
 
@@ -148,18 +151,105 @@ int main() {
         // html/css/javascript for second page
         // data needed is included in data variable and can access any of that data in this code
         string html2 = R"(
-        <body>
-            <p id="firstName"></p>
-            <p id="secondName"></p>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Critter Connections!</title>
+<style>
+body {
+	background-color: #a7e0a2
+}
+   .container {
+       position: relative;
+       width: device-width;
+       height: device-height;
+       display: flex;
+       justify-content: center;
+       margin: 0;
+   }
 
+   .rectangle {
+       width: 500px;
+       height: 150px;
+       position: absolute;
+   }
+
+   .one {
+       background-color: #22b512;
+       border-radius: 15px;
+       z-index: -1;
+   }
+   .two {
+       background-color: #22b512;
+       width: 500px;
+       height: 600px;
+       top: 200px;
+       border-radius: 15px;
+       z-index: -1;
+   }
+}
+</style>
+</head>
+<body>
+   <div class="container">
+       <div class="rectangle one"></div>
+       <div class="rectangle two"></div>
+   </div>
+    <font color=#824c1d><h1 style="text-align: center;">Common ancestor: <span id="common"></span></h1></font>
+	<font color=#824c1d><h1 style="text-align: center;">Relatedness: <span id="relationship"></span>%</h1></font>
+
+    <form style="text-align: center;">
+    <br>
+    <br>
+    <br>
+    <br>
+    <font color=#824c1d><h1 style="text-align: center;"><span id="commonName1"></span></h1></font>
+    <div id="image1"></div>
+    <font color=#824c1d><h1 style="text-align: center;"><span id="commonName2"></span></h1></font>
+    <div id="image2"></div>
+    <br>
+	<font color=#824c1d><h2 style="text-align: center;">BFS Calculation Time: <span id="bfsTime"></span> microseconds</h2></font>
+    <font color=#824c1d><h2 style="text-align: center;">DFS Calculation Time: <span id="dfsTime"></span> microseconds</h2></font>
+
+    <button onclick='backToHome(event)'>Reset</button>
+	</form>
+</body>
+</html>
 
         <script>
             )" + data +
             R"(
-        document.getElementById("firstName").innerHTML = name1;
-        document.getElementById("secondName").innerHTML = name2;
+
+            document.getElementById("bfsTime").innerHTML = bfs;
+            document.getElementById("dfsTime").innerHTML = dfs;
+            document.getElementById("relationship").innerHTML = relationship;
+            document.getElementById("common").innerHTML = lca;
+            document.getElementById("commonName1").innerHTML = name1;
+            document.getElementById("commonName2").innerHTML = name2;
+
+
+            async function getData(query, perPage, id) {
+                  const url = `https://api.pexels.com/v1/search?query=${query}&per_page=${perPage}`;
+                  const response = await fetch(url, {
+                  headers: {
+                    Authorization: '3nokUU6XeNybGkvYRcYq4lNUh4OtxkfE56TUshmYVQCTTOSwHzW2wr0u'
+                  }});
+                  const data = await response.json();
+                  const imageContainer = document.getElementById(id);
+                  imageContainer.innerHTML = `<img src="${data.photos[0].src.tiny}">`;
+                  return data.photos[0].src.tiny;
+            };
+            function backToHome(event) {
+                event.preventDefault();
+                window.location.assign("/")
+            }
+
+            getData(name1, 1, "image1");
+            getData(name2, 2, "image2");
+
         </script>
-        </body>
         )";
 
 
